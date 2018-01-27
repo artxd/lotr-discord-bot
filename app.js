@@ -3,8 +3,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 const config = require("./config.json");
-// config.token contains the bot's token
-// config.prefix contains the message prefix.
 
 const commands = [
   {
@@ -14,27 +12,11 @@ const commands = [
     execute: function(message, parameters) {
       let member = message.member;
       let date = member.joinedAt;
-      console.log(date);
       message.reply(`Oh, Hello there! So you want to know more about yourself? 
-      \n-You joined ${member.guild.name} on ${date.getDay()}.${date.getMonth()}.${date.getFullYear()}.
-      \n-You like to eat ass.
-      \n-You are fat and ugly.`);
+      \n-You joined ${member.guild.name} on ${date.getDate()} ${getNamedMonth(date.getMonth())} ${date.getFullYear()}.
     }
   }
 ];
-
-client.on("ready", () => {
-  console.log(`${client.user.username} has joined the guild.`);
-});
-
-client.on("guildCreate", guild => {
-  console.log(`New guild joined: ${guild.name}.`);
-});
-
-client.on("guildDelete", guild => {
-  console.log(`Removed from: ${guild.name}`);
-});
-
 
 client.on("message", async message => {
 
@@ -57,3 +39,32 @@ client.on("message", async message => {
 });
 
 client.login(config.token);
+
+function getNamedMonth(month) {
+  switch (month) {
+    case 0:
+      return "January"
+    case 1:
+      return "February"
+    case 2:
+      return "March"
+    case 3:
+      return "April"
+    case 4:
+      return "May"
+    case 5:
+      return "June"
+    case 6:
+      return "July"
+    case 7:
+      return "August"
+    case 8:
+      return "September"
+    case 9:
+      return "October"
+    case 10:
+      return "November"
+    case 11:
+      return "December"
+  }
+}
